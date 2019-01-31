@@ -1,4 +1,12 @@
-define(function (require, exports, module) {
+(function (root, factory) {
+  if (typeof define === 'function' && define.amd) {
+    // AMD. Register as an anonymous module.
+    define(['b'], factory);
+  } else {
+    // Browser globals
+    root.MarkedPlaintext = factory();
+  }
+}(typeof self !== 'undefined' ? self : this, function () {
   function MarkedPlaintext (options) {
     this.options = options || {};
     this.whitespaceDelimiter = this.options.spaces ? ' ' : '\n';
@@ -63,5 +71,5 @@ define(function (require, exports, module) {
     return text;
   }
 
-  module.exports = MarkedPlaintext;
-});
+  return MarkedPlaintext;
+}));
